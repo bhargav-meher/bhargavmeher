@@ -326,33 +326,35 @@
   <script>
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
-    const app = document.getElementById('app');
-    const iconSun = document.getElementById('icon-sun');
-    const iconMoon = document.getElementById('icon-moon');
-    const root = document.documentElement;
+const app = document.getElementById('app');
+const iconSun = document.getElementById('icon-sun');
+const iconMoon = document.getElementById('icon-moon');
 
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
+// Check for saved theme preference or default to dark
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = app.classList.contains('dark-theme') ? 'dark' : 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
+// Apply the saved theme, system preference, or dark by default
+applyTheme(savedTheme || (prefersDark ? 'dark' : 'dark'));
 
-    function applyTheme(theme) {
-      if (theme === 'dark') {
-        app.classList.add('dark-theme');
-        iconSun.classList.remove('hidden');
-        iconMoon.classList.add('hidden');
-      } else {
-        app.classList.remove('dark-theme');
-        iconSun.classList.add('hidden');
-        iconMoon.classList.remove('hidden');
-      }
-    }
+themeToggle.addEventListener('click', () => {
+  const currentTheme = app.classList.contains('dark-theme') ? 'dark' : 'light';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(newTheme);
+  localStorage.setItem('theme', newTheme);
+});
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    app.classList.add('dark-theme');
+    iconSun.classList.remove('hidden');
+    iconMoon.classList.add('hidden');
+  } else {
+    app.classList.remove('dark-theme');
+    iconSun.classList.add('hidden');
+    iconMoon.classList.remove('hidden');
+  }
+}
 
     // Active nav link on scroll
     const navLinks = document.querySelectorAll('.nav-link');
