@@ -42,7 +42,6 @@
     .dark-theme{ --bg: #001226; --text: #e6f7ff; }
     .btn-accent{ background: linear-gradient(90deg, rgba(0,209,255,1) 0%, rgba(0,160,200,1) 100%); }
     
-    /* Light mode header */
     header {
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(248, 250, 252, 0.98) 100%) !important;
       border-bottom: 1px solid rgba(0, 209, 255, 0.2) !important;
@@ -58,7 +57,6 @@
       color: #0f172a !important;
     }
 
-    /* Dark mode header */
     .dark-theme ~ header,
     .dark-theme header {
       background: linear-gradient(180deg, rgba(0, 18, 38, 0.98) 0%, rgba(0, 18, 38, 0.9) 100%) !important;
@@ -75,26 +73,21 @@
     }
     
     @keyframes wavePulse {
-      0% {
+      0%, 100% {
         transform: scale(1);
-        opacity: 0.7;
+        opacity: 0.9;
+      }
+      25% {
+        transform: scale(1.2);
+        opacity: 0.6;
       }
       50% {
-        transform: scale(1.3);
-        opacity: 0.3;
+        transform: scale(1.5);
+        opacity: 0.4;
       }
-      100% {
-        transform: scale(1);
-        opacity: 0.7;
-      }
-    }
-
-    @keyframes rotateBg {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 40px 40px;
+      75% {
+        transform: scale(1.2);
+        opacity: 0.6;
       }
     }
 
@@ -103,48 +96,19 @@
         background-position: -1000px 0;
         opacity: 0.3;
       }
+      25% {
+        opacity: 0.5;
+      }
       50% {
-        opacity: 0.6;
+        opacity: 0.7;
+      }
+      75% {
+        opacity: 0.5;
       }
       100% {
         background-position: 1000px 0;
         opacity: 0.3;
       }
-    }
-
-    @keyframes floatDots {
-      0%, 100% {
-        transform: translateY(0px);
-        opacity: 0.3;
-      }
-      50% {
-        transform: translateY(-30px);
-        opacity: 0.8;
-      }
-    }
-
-    #app::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle, rgba(0, 209, 255, 0.5) 1.5px, transparent 1.5px);
-      background-size: 50px 50px;
-      background-repeat: repeat;
-      animation: rotateBg 3s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-      box-shadow: inset 0 0 200px rgba(0, 209, 255, 0.25);
-    }
-    
-    /* Light mode dots - more visible */
-    .light-mode #app::before {
-      background: 
-        radial-gradient(circle, rgba(0, 150, 200, 0.7) 2px, transparent 2px);
-      box-shadow: inset 0 0 200px rgba(0, 150, 200, 0.3);
     }
 
     #app::after {
@@ -154,9 +118,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, transparent 30%, rgba(0, 209, 255, 0.25) 50%, transparent 70%);
+      background: linear-gradient(45deg, transparent 30%, rgba(0, 209, 255, 0.4) 50%, transparent 70%);
       background-size: 200% 200%;
-      animation: shimmer 7s ease-in-out infinite;
+      animation: shimmer 5s ease-in-out infinite;
       pointer-events: none;
       z-index: 0;
     }
@@ -166,14 +130,14 @@
       position: fixed;
       top: 15%;
       left: 10%;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(0, 209, 255, 0.5) 0%, rgba(0, 209, 255, 0.2) 50%, transparent 70%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 209, 255, 0.8) 0%, rgba(0, 209, 255, 0.3) 50%, transparent 70%);
       border-radius: 50%;
-      animation: wavePulse 4s ease-in-out infinite;
+      animation: wavePulse 3s ease-in-out infinite;
       pointer-events: none;
       z-index: 0;
-      box-shadow: 0 0 60px rgba(0, 209, 255, 0.3);
+      box-shadow: 0 0 100px rgba(0, 209, 255, 0.6);
     }
 
     body::after {
@@ -181,14 +145,14 @@
       position: fixed;
       bottom: 15%;
       right: 10%;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(255, 127, 80, 0.4) 0%, rgba(255, 127, 80, 0.15) 50%, transparent 70%);
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(255, 127, 80, 0.7) 0%, rgba(255, 127, 80, 0.2) 50%, transparent 70%);
       border-radius: 50%;
-      animation: wavePulse 5s ease-in-out infinite 1s;
+      animation: wavePulse 3.5s ease-in-out infinite 1s;
       pointer-events: none;
       z-index: 0;
-      box-shadow: 0 0 80px rgba(255, 127, 80, 0.2);
+      box-shadow: 0 0 120px rgba(255, 127, 80, 0.5);
     }
 
     #app {
@@ -197,9 +161,9 @@
     }
     
     header {
-      background: linear-gradient(180deg, rgba(0, 18, 38, 0.95) 0%, rgba(0, 18, 38, 0.85) 100%) !important;
+      background: linear-gradient(180deg, #87ceeb 0%, #5dade2 100%) !important;
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+      border-bottom: 2px solid rgba(0, 209, 255, 0.5);
     }
 
     header.dark-theme {
@@ -256,43 +220,43 @@
     }
 
     section.visible {
-      animation: fadeInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+      animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
     }
 
     section#about .col-span-1.visible {
-      animation: slideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+      animation: slideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
     }
 
     section#about .col-span-2.visible {
-      animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+      animation: slideInRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
     }
 
     .skill-tag {
-      animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+      animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
     }
 
-    .skill-tag:nth-child(1) { animation-delay: 0.4s; }
-    .skill-tag:nth-child(2) { animation-delay: 0.45s; }
-    .skill-tag:nth-child(3) { animation-delay: 0.5s; }
-    .skill-tag:nth-child(4) { animation-delay: 0.55s; }
-    .skill-tag:nth-child(5) { animation-delay: 0.6s; }
-    .skill-tag:nth-child(6) { animation-delay: 0.65s; }
-    .skill-tag:nth-child(7) { animation-delay: 0.7s; }
+    .skill-tag:nth-child(1) { animation-delay: 0.2s; }
+    .skill-tag:nth-child(2) { animation-delay: 0.25s; }
+    .skill-tag:nth-child(3) { animation-delay: 0.3s; }
+    .skill-tag:nth-child(4) { animation-delay: 0.35s; }
+    .skill-tag:nth-child(5) { animation-delay: 0.4s; }
+    .skill-tag:nth-child(6) { animation-delay: 0.45s; }
+    .skill-tag:nth-child(7) { animation-delay: 0.5s; }
 
     .project-card {
-      animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+      animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
     }
 
-    .project-card:nth-child(1) { animation-delay: 0.35s; }
+    .project-card:nth-child(1) { animation-delay: 0.2s; }
 
     h2 {
-      animation: slideInLeft 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+      animation: slideInLeft 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
     }
 
-    section#about h2 { animation-delay: 0.15s; }
-    section#skills h2 { animation-delay: 0.25s; }
-    section#projects h2 { animation-delay: 0.35s; }
-    section#contact h2 { animation-delay: 0.45s; }
+    section#about h2 { animation-delay: 0.05s; }
+    section#skills h2 { animation-delay: 0.1s; }
+    section#projects h2 { animation-delay: 0.15s; }
+    section#contact h2 { animation-delay: 0.2s; }
   </style>
 </head>
 
@@ -322,21 +286,21 @@
     });
   </script>
 
-      <div id="app" class="min-h-screen light-mode" style="background-color:var(--bg); color:var(--text); transition:background-color .25s, color .25s;">
-  <header style="width: 100vw; position: fixed; top: 0; left: 0; z-index: 50; background: linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(248, 250, 252, 0.98) 100%); border-bottom: 2px solid rgba(0, 209, 255, 0.3); padding: 1.5rem 1rem; display: flex; align-items: center; justify-content: space-between;" id="header">
+  <div id="app" class="min-h-screen light-mode" style="background-color:var(--bg); color:var(--text); transition:background-color .25s, color .25s;">
+    <header style="width: 100vw; position: fixed; top: 0; left: 0; z-index: 50; background: linear-gradient(180deg, #87ceeb 0%, #5dade2 100%); border-bottom: 2px solid rgba(0, 209, 255, 0.5); padding: 1.5rem 1rem; display: flex; align-items: center; justify-content: space-between;" id="header">
       <div style="display: flex; align-items: center; gap: 1rem;">
         <div>
-          <h1 style="font-size: 1.25rem; font-weight: 600; margin: 0; color: #fff; text-shadow: 0 0 2px rgba(255,255,255,0.5);">Bhargav Meher</h1>
-          <p style="font-size: 0.875rem; opacity: 0.9; margin: 0; color: #fff;">Student - Eager to Learn</p>
+          <h1 style="font-size: 1.25rem; font-weight: 700; margin: 0; color: #001a33;">Bhargav Meher</h1>
+          <p style="font-size: 0.875rem; margin: 0; color: #003d66;">Student - Eager to Learn</p>
         </div>
       </div>
 
       <div style="display: flex; align-items: center; gap: 0.75rem;">
-        <nav style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.4); border-radius: 0.5rem; padding: 0.25rem 0.75rem; backdrop-filter: blur(10px); border: 1px solid rgba(0, 209, 255, 0.2);">
-          <a href="#about" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #fff; font-weight: 500;">About</a>
-          <a href="#skills" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #fff; font-weight: 500;">Skills</a>
-          <a href="#projects" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #fff; font-weight: 500;">Projects</a>
-          <a href="#contact" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #fff; font-weight: 500;">Contact</a>
+        <nav style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.7); border-radius: 0.5rem; padding: 0.25rem 0.75rem; border: 1px solid rgba(0, 100, 200, 0.3);">
+          <a href="#about" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">About</a>
+          <a href="#skills" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Skills</a>
+          <a href="#projects" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Projects</a>
+          <a href="#contact" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Contact</a>
         </nav>
 
         <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -527,7 +491,7 @@
 
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(savedTheme || (prefersDark ? 'dark' : 'dark'));
+    applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
 
     themeToggle.addEventListener('click', () => {
       const currentTheme = app.classList.contains('dark-theme') ? 'dark' : 'light';
@@ -542,31 +506,11 @@
         app.classList.remove('light-mode');
         iconSun.classList.remove('hidden');
         iconMoon.classList.add('hidden');
-        
-        // Update header for dark mode
-        const header = document.getElementById('header');
-        header.style.background = 'linear-gradient(180deg, rgba(0, 18, 38, 0.98) 0%, rgba(0, 18, 38, 0.9) 100%)';
-        header.style.borderBottom = '2px solid rgba(0, 209, 255, 0.3)';
-        header.querySelectorAll('h1, p, .nav-link').forEach(el => {
-          el.style.color = '#e6f7ff';
-        });
-        header.querySelector('nav').style.background = 'rgba(0, 209, 255, 0.1)';
-        header.querySelector('nav').style.borderColor = 'rgba(0, 209, 255, 0.3)';
       } else {
         app.classList.remove('dark-theme');
         app.classList.add('light-mode');
         iconSun.classList.add('hidden');
         iconMoon.classList.remove('hidden');
-        
-        // Update header for light mode - WHITE TEXT
-        const header = document.getElementById('header');
-        header.style.background = 'linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(248, 250, 252, 0.98) 100%)';
-        header.style.borderBottom = '2px solid rgba(0, 209, 255, 0.3)';
-        header.querySelectorAll('h1, p, .nav-link').forEach(el => {
-          el.style.color = '#fff';
-        });
-        header.querySelector('nav').style.background = 'rgba(255, 255, 255, 0.4)';
-        header.querySelector('nav').style.borderColor = 'rgba(0, 209, 255, 0.2)';
       }
     }
 
@@ -600,38 +544,30 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Remove class first to reset animation
           entry.target.classList.remove('visible');
-          
-          // Trigger reflow to restart animation
           void entry.target.offsetWidth;
-          
-          // Add class back to trigger animation
           entry.target.classList.add('visible');
           
-          // Animate skill tags when section becomes visible
           if (entry.target.id === 'skills') {
             const skillTags = entry.target.querySelectorAll('.skill-tag');
             skillTags.forEach((tag, index) => {
               tag.style.animation = 'none';
-              void tag.offsetWidth; // Trigger reflow
+              void tag.offsetWidth;
               tag.style.animation = `fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
               tag.style.animationDelay = `${0.1 + index * 0.05}s`;
             });
           }
           
-          // Animate project cards when section becomes visible
           if (entry.target.id === 'projects') {
             const projectCards = entry.target.querySelectorAll('.project-card');
             projectCards.forEach((card, index) => {
               card.style.animation = 'none';
-              void card.offsetWidth; // Trigger reflow
+              void card.offsetWidth;
               card.style.animation = `fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
               card.style.animationDelay = `${0.1 + index * 0.1}s`;
             });
           }
 
-          // Animate about columns
           if (entry.target.id === 'about') {
             const leftCol = entry.target.querySelector('.col-span-1');
             const rightCol = entry.target.querySelector('.col-span-2');
@@ -647,7 +583,6 @@
             }
           }
         } else {
-          // Remove visible class when scrolled out of view
           entry.target.classList.remove('visible');
           
           if (entry.target.id === 'about') {
