@@ -94,20 +94,14 @@
     @keyframes shimmer {
       0% {
         background-position: -1000px 0;
-        opacity: 0.3;
-      }
-      25% {
         opacity: 0.5;
       }
       50% {
-        opacity: 0.7;
-      }
-      75% {
-        opacity: 0.5;
+        opacity: 0.8;
       }
       100% {
         background-position: 1000px 0;
-        opacity: 0.3;
+        opacity: 0.5;
       }
     }
 
@@ -256,7 +250,166 @@
     section#about h2 { animation-delay: 0.05s; }
     section#skills h2 { animation-delay: 0.1s; }
     section#projects h2 { animation-delay: 0.15s; }
-    section#contact h2 { animation-delay: 0.2s; }
+    section#gallery h2 { animation-delay: 0.2s; }
+    section#contact h2 { animation-delay: 0.25s; }
+
+    .gallery-grid {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 209, 255, 0.5) rgba(0, 209, 255, 0.1);
+    }
+
+    .gallery-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .gallery-grid::-webkit-scrollbar-track {
+      background: rgba(0, 209, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    .gallery-grid::-webkit-scrollbar-thumb {
+      background: rgba(0, 209, 255, 0.5);
+      border-radius: 4px;
+    }
+
+    .gallery-grid::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 209, 255, 0.8);
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      background: white/10;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-width: 280px;
+      flex-shrink: 0;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-item.visible {
+      animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .gallery-scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 209, 255, 0.7);
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 0.25rem;
+      z-index: 10;
+      transition: background 0.3s ease;
+    }
+
+    .gallery-scroll-btn:hover {
+      background: rgba(0, 209, 255, 1);
+    }
+
+    .gallery-scroll-btn-left {
+      left: -3rem;
+    }
+
+    .gallery-scroll-btn-right {
+      right: -3rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeInUp 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 0.5rem;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1001;
+    }
+
+    .close-modal:hover {
+      color: #00d1ff;
+    }
+
+    .prev-btn, .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 209, 255, 0.7);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 0.25rem;
+      z-index: 1001;
+      transition: background 0.3s ease;
+    }
+
+    .prev-btn:hover, .next-btn:hover {
+      background: rgba(0, 209, 255, 1);
+    }
+
+    .prev-btn {
+      left: 1rem;
+    }
+
+    .next-btn {
+      right: 1rem;
+    }
   </style>
 </head>
 
@@ -300,6 +453,7 @@
           <a href="#about" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">About</a>
           <a href="#skills" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Skills</a>
           <a href="#projects" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Projects</a>
+          <a href="#gallery" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Gallery</a>
           <a href="#contact" class="nav-link" style="padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.875rem; text-decoration: none; color: #001a33; font-weight: 600;">Contact</a>
         </nav>
 
@@ -406,6 +560,40 @@
         </div>
       </section>
 
+      <section id="gallery" class="py-16 border-t border-white/10">
+        <h2 class="text-3xl font-bold">Gallery</h2>
+        <p class="text-sm opacity-80 mt-2">A collection of things i love.</p>
+        
+        <div class="mt-8 relative">
+          <div class="gallery-grid" id="gallery-grid">
+            <div class="gallery-item visible" style="animation-delay: 0.1s">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop" alt="Mountain Peak" onclick="openGallery(this.src)">
+            </div>
+            <div class="gallery-item visible" style="animation-delay: 0.15s">
+              <img src="/images/a-bunch-of-high-res-surf-wallpapers-v0-z9domkqzf6c81.webp" alt="Snow Mountains" onclick="openGallery(this.src)">
+            </div>
+            <div class="gallery-item visible" style="animation-delay: 0.2s">
+              <img src="images/c2bf736a9ee71fcb303f295f27e0c166.jpg" alt="Mountain Landscape" onclick="openGallery(this.src)">
+            </div>
+            <div class="gallery-item visible" style="animation-delay: 0.25s">
+              <img src="images/pexels-raulling-29181477.jpg" alt="Alpine Mountains" onclick="openGallery(this.src)">
+            </div>
+           
+          </div>
+          <button onclick="scrollGallery(-1)" class="gallery-scroll-btn gallery-scroll-btn-left">&#10094;</button>
+          <button onclick="scrollGallery(1)" class="gallery-scroll-btn gallery-scroll-btn-right">&#10095;</button>
+        </div>
+      </section>
+
+      <div id="gallery-modal" class="modal">
+        <div class="modal-content">
+          <button class="close-modal" onclick="closeGallery()">&times;</button>
+          <button class="prev-btn" onclick="changeImage(-1)">&#10094;</button>
+          <img id="modal-image" src="" alt="Gallery Image">
+          <button class="next-btn" onclick="changeImage(1)">&#10095;</button>
+        </div>
+      </div>
+
       <section id="contact" class="py-16 border-t border-white/10">
         <h2 class="text-3xl font-bold">Contact</h2>
         <p class="text-sm opacity-80 mt-2">Drop a short message — or use the social links in the header.</p>
@@ -441,6 +629,60 @@
   </div>
 
   <script>
+    // GALLERY FUNCTIONALITY
+    let currentImageIndex = 0;
+    const galleryImages = [];
+
+    function scrollGallery(direction) {
+      const gallery = document.getElementById('gallery-grid');
+      const scrollAmount = 300;
+      gallery.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    function initGallery() {
+      const galleryItems = document.querySelectorAll('.gallery-item img');
+      galleryItems.forEach(img => {
+        galleryImages.push(img.src);
+      });
+    }
+
+    function openGallery(src) {
+      currentImageIndex = galleryImages.indexOf(src);
+      const modal = document.getElementById('gallery-modal');
+      const modalImage = document.getElementById('modal-image');
+      modalImage.src = src;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGallery() {
+      const modal = document.getElementById('gallery-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function changeImage(n) {
+      currentImageIndex += n;
+      if (currentImageIndex >= galleryImages.length) {
+        currentImageIndex = 0;
+      } else if (currentImageIndex < 0) {
+        currentImageIndex = galleryImages.length - 1;
+      }
+      document.getElementById('modal-image').src = galleryImages[currentImageIndex];
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('gallery-modal');
+      if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'Escape') closeGallery();
+      }
+    });
+
     // CURSOR TRAILER ANIMATION
     const createTrail = (e) => {
       const trail = document.createElement('div');
@@ -568,6 +810,16 @@
             });
           }
 
+          if (entry.target.id === 'gallery') {
+            const galleryItems = entry.target.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item, index) => {
+              item.style.animation = 'none';
+              void item.offsetWidth;
+              item.style.animation = `fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
+              item.style.animationDelay = `${0.1 + index * 0.05}s`;
+            });
+          }
+
           if (entry.target.id === 'about') {
             const leftCol = entry.target.querySelector('.col-span-1');
             const rightCol = entry.target.querySelector('.col-span-2');
@@ -626,6 +878,9 @@
         }
       });
     });
+
+    // Initialize gallery
+    initGallery();
   </script>
 </body>
 </html>
